@@ -1,0 +1,157 @@
+@import "tailwindcss";
+
+@theme {
+    --color-brand-navy: #0A192F;
+    --color-brand-gold: #D4AF37;
+    --color-brand-warm: #F5F2ED;
+
+    --font-serif: "Playfair Display", serif;
+    --font-sans: Inter, sans-serif;
+    --font-sales: "Plus Jakarta Sans", sans-serif;
+}
+
+/* ==========================================================================
+   Gabriel Marques — Princípios da Adoração
+   Estilos customizados (além das classes utilitárias do Tailwind)
+   ========================================================================== */
+
+.glass-card {
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.gold-gradient {
+    background: linear-gradient(135deg, #D4AF37 0%, #F1D592 50%, #D4AF37 100%);
+}
+
+.navy-gradient {
+    background: linear-gradient(135deg, #0A192F 0%, #112240 100%);
+}
+
+@keyframes pulse-slow {
+    0%, 100% { opacity: 0.2; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(1.05); }
+}
+.animate-pulse-slow {
+    animation: pulse-slow 4s infinite ease-in-out;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #F5F2ED; }
+::-webkit-scrollbar-thumb { background: #D4AF37; border-radius: 10px; }
+
+/* View Management (home / curso) */
+.view { display: none; }
+.view.active { display: block; }
+
+/* Esconder itens de menu conforme a view ativa */
+body.is-course .nav-home-only { display: none; }
+body:not(.is-course) .nav-course-only { display: none; }
+
+/* Menu mobile */
+#mobile-menu { display: none; }
+#mobile-menu.open { display: flex; }
+
+/* Acessibilidade: foco visível em links e botões */
+a:focus-visible,
+button:focus-visible {
+    outline: 2px solid #D4AF37;
+    outline-offset: 2px;
+}
+
+/* ==========================================================================
+   Animação escalonada ao rolar a página (stagger effect)
+   Elementos com .reveal começam invisíveis/deslocados e entram suavemente
+   quando cruzam a viewport (ver initScrollReveal em js/main.js). A var
+   --stagger (0, 1, 2…) define a ordem de entrada de cada item do grupo.
+   ========================================================================== */
+.reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+    transition-delay: calc(var(--stagger, 0) * 110ms);
+}
+.reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+    .reveal {
+        transition: none;
+        opacity: 1;
+        transform: none;
+    }
+}
+
+/* ==========================================================================
+   Degradês de fusão entre seções escuras e claras
+   Uma pseudo-camada com gradiente linear no topo da seção seguinte,
+   partindo da cor da seção anterior até transparente, suaviza o corte
+   abrupto de cor entre blocos navy <-> claros.
+   ========================================================================== */
+.section-blend {
+    position: relative;
+}
+.section-blend::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 260px;
+    pointer-events: none;
+    z-index: 1;
+}
+/* Paradas de opacidade "easing" (em vez de 2 pontos lineares) — uma
+   fusão em gradiente simples de cor-para-transparente sempre parece ter
+   um corte visível perto do fim porque o olho humano não percebe opacidade
+   de forma linear. Essas paradas intermediárias imitam uma curva suave
+   (ease-out), eliminando essa linha. */
+.section-blend--from-navy::before {
+    background: linear-gradient(to bottom,
+        rgba(10, 25, 47, 1) 0%,
+        rgba(10, 25, 47, 0.74) 19%,
+        rgba(10, 25, 47, 0.54) 34%,
+        rgba(10, 25, 47, 0.38) 47%,
+        rgba(10, 25, 47, 0.28) 56.5%,
+        rgba(10, 25, 47, 0.19) 65%,
+        rgba(10, 25, 47, 0.13) 73%,
+        rgba(10, 25, 47, 0.08) 80%,
+        rgba(10, 25, 47, 0.04) 86%,
+        rgba(10, 25, 47, 0.02) 91%,
+        rgba(10, 25, 47, 0.01) 95%,
+        rgba(10, 25, 47, 0) 100%);
+}
+.section-blend--from-warm::before {
+    background: linear-gradient(to bottom,
+        rgba(245, 242, 237, 1) 0%,
+        rgba(245, 242, 237, 0.74) 19%,
+        rgba(245, 242, 237, 0.54) 34%,
+        rgba(245, 242, 237, 0.38) 47%,
+        rgba(245, 242, 237, 0.28) 56.5%,
+        rgba(245, 242, 237, 0.19) 65%,
+        rgba(245, 242, 237, 0.13) 73%,
+        rgba(245, 242, 237, 0.08) 80%,
+        rgba(245, 242, 237, 0.04) 86%,
+        rgba(245, 242, 237, 0.02) 91%,
+        rgba(245, 242, 237, 0.01) 95%,
+        rgba(245, 242, 237, 0) 100%);
+}
+.section-blend--from-white::before {
+    background: linear-gradient(to bottom,
+        rgba(255, 255, 255, 1) 0%,
+        rgba(255, 255, 255, 0.74) 19%,
+        rgba(255, 255, 255, 0.54) 34%,
+        rgba(255, 255, 255, 0.38) 47%,
+        rgba(255, 255, 255, 0.28) 56.5%,
+        rgba(255, 255, 255, 0.19) 65%,
+        rgba(255, 255, 255, 0.13) 73%,
+        rgba(255, 255, 255, 0.08) 80%,
+        rgba(255, 255, 255, 0.04) 86%,
+        rgba(255, 255, 255, 0.02) 91%,
+        rgba(255, 255, 255, 0.01) 95%,
+        rgba(255, 255, 255, 0) 100%);
+}

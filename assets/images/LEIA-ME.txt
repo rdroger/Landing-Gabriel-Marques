@@ -1,0 +1,20 @@
+Todas as imagens do site agora sao fotos reais (nao ha mais placeholders do
+picsum.photos). Fonte de cada uma:
+
+- book-cover.jpg         -> capa oficial do livro (enviada por voce via WhatsApp)
+- gabriel-portrait.jpg    -> foto do Gabriel falando ao microfone, secao "Quem e Gabriel Marques?"
+- photo-1.jpg             -> mockup 3D da capa do livro, secao "O Livro"
+- photo-2.jpg             -> Gabriel tocando guitarra e conduzindo a adoracao, secao "O Livro"
+- curso-ministracao.jpg   -> Gabriel orando/ministrando por pessoas, secao "Curso Presencial" (home)
+- capa do podcast          -> carregada automaticamente do RSS a cada visita (nao fica salva aqui)
+
+Arquivos que voce enviou direto por aqui (gabriel-portrait.png, orando.png)
+ficaram guardados na pasta mas nao sao mais usados no site — usei versoes em
+resolucao maior das mesmas fotos, que eu ja tinha do site antigo. Pode apagar
+esses dois .png se quiser, ou deixar guardado como backup.
+
+course-workshop.jpg (banda da CIAM Music) tambem ficou sem uso depois da troca
+pela foto de ministracao — guardei caso queira usar em outro lugar do site.
+
+Se quiser trocar qualquer imagem no futuro, e so me mandar a foto nova que eu
+redimensiono/otimizo e atualizo o index.html.

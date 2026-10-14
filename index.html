@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gabriel Marques - Princípios da Adoração</title>
+    <meta name="description" content="Princípios da Adoração: um manifesto profético para todos que servem no altar. Conheça o livro, o curso presencial e o ARCO Podcast de Gabriel Marques.">
+    <meta name="theme-color" content="#0A192F">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Gabriel Marques - Princípios da Adoração">
+    <meta property="og:description" content="Um manifesto profético para todos que servem no altar. Descubra os princípios eternos que governam o som no Reino de Deus.">
+    <meta property="og:image" content="assets/images/book-cover.jpg">
+    <meta property="og:locale" content="pt_BR">
+
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:ital,wght@0,100..900;1,100..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
+
+    <!-- Preconnect para o facade do YouTube (thumbnail + player sob demanda) -->
+    <link rel="preconnect" href="https://i.ytimg.com">
+    <link rel="preconnect" href="https://www.youtube-nocookie.com">
+
+    <!-- CSS compilado do Tailwind (gerado por "npm run build:css", ver src/input.css) -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-brand-warm text-brand-navy font-sans antialiased selection:bg-brand-gold selection:text-brand-navy">
+
+    <!-- Navbar -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-brand-warm/80 backdrop-blur-md border-b border-brand-navy/5">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-4 md:gap-6">
+                <!-- Botão Home -->
+                <a href="#" onclick="showView('home', event)" class="flex items-center gap-2 text-brand-navy hover:text-brand-gold transition-all group scale-110 md:scale-125 origin-left" title="Voltar para Home">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                    <span class="hidden sm:inline text-xs font-bold uppercase tracking-widest">Home</span>
+                </a>
+                <div class="w-px h-8 bg-brand-navy/10 hidden sm:block"></div>
+                <span class="font-serif text-xl md:text-2xl font-bold tracking-tighter text-brand-navy uppercase" id="nav-title">Gabriel Marques</span>
+            </div>
+
+            <!-- Menu Dinâmico (desktop) -->
+            <div class="hidden lg:flex items-center gap-8 text-[10px] font-bold tracking-widest uppercase">
+                <!-- Links apenas da Home -->
+                <a href="#livro" class="nav-home-only hover:text-brand-gold transition-colors">O Livro</a>
+                <a href="#sobre" class="nav-home-only hover:text-brand-gold transition-colors">Sobre</a>
+                <a href="#podcast" class="nav-home-only hover:text-brand-gold transition-colors">Podcast</a>
+                <a href="#" onclick="showView('course', event)" class="nav-home-only hover:text-brand-gold transition-colors">Curso</a>
+                <a href="#contato" class="nav-home-only hover:text-brand-gold transition-colors">Contato</a>
+
+                <!-- Links apenas do Curso -->
+                <a href="#" onclick="showView('home', event)" class="nav-course-only hover:text-brand-gold transition-colors">Início</a>
+                <span class="nav-course-only text-brand-gold">O Curso</span>
+            </div>
+
+            <div class="flex items-center gap-3">
+                <a href="https://loja.uiclap.com/titulo/ua121453/" target="_blank" rel="noopener" class="bg-brand-navy text-white px-5 md:px-6 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest hover:bg-brand-gold transition-all duration-300">
+                    Comprar Livro
+                </a>
+
+                <!-- Botão menu mobile -->
+                <button type="button" onclick="toggleMobileMenu()" aria-label="Abrir menu" aria-controls="mobile-menu" class="lg:hidden w-10 h-10 flex items-center justify-center rounded-full border border-brand-navy/10 text-brand-navy hover:bg-brand-navy hover:text-white transition-all">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Menu mobile -->
+        <div id="mobile-menu" class="lg:hidden flex-col bg-brand-warm border-t border-brand-navy/5 px-6 py-6 gap-5 text-xs font-bold tracking-widest uppercase">
+            <a href="#livro" class="nav-home-only hover:text-brand-gold transition-colors">O Livro</a>
+            <a href="#sobre" class="nav-home-only hover:text-brand-gold transition-colors">Sobre</a>
+            <a href="#podcast" class="nav-home-only hover:text-brand-gold transition-colors">Podcast</a>
+            <a href="#" onclick="showView('course', event)" class="nav-home-only hover:text-brand-gold transition-colors">Curso</a>
+            <a href="#contato" class="nav-home-only hover:text-brand-gold transition-colors">Contato</a>
+            <a href="#" onclick="showView('home', event)" class="nav-course-only hover:text-brand-gold transition-colors">Início</a>
+        </div>
+    </nav>
+
+    <!-- VIEW: HOME -->
+    <div id="view-home" class="view active">
+        <!-- Hero Section -->
+        <section class="relative min-h-screen flex items-center pt-20 overflow-hidden">
+            <div class="absolute inset-0 z-0">
+                <div class="absolute top-0 left-0 w-full h-full bg-brand-warm opacity-90"></div>
+                <div class="absolute -top-24 -right-24 w-96 h-96 bg-brand-gold/10 rounded-full blur-3xl"></div>
+                <div class="absolute -bottom-24 -left-24 w-96 h-96 bg-brand-navy/5 rounded-full blur-3xl"></div>
+            </div>
+
+            <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center relative z-10">
+                <div class="reveal" style="--stagger:0">
+                    <span class="inline-block px-4 py-1 bg-brand-gold/10 text-brand-gold rounded-full text-[10px] font-bold uppercase tracking-widest mb-6">Lançamento Oficial</span>
+                    <h1 class="text-5xl sm:text-6xl md:text-8xl font-serif leading-[0.9] mb-8">Princípios da <br><span class="italic text-brand-gold text-7xl md:text-9xl">Adoração</span></h1>
+                    <p class="text-lg md:text-xl text-brand-navy/70 leading-relaxed mb-4 max-w-lg">Um manifesto profético para todos que servem no altar. Antes da luz, houve um som: a voz de Deus — o mesmo som que o seu altar é chamado a ecoar.</p>
+                    <p class="italic font-serif text-brand-gold mb-10">"Seu som carrega destino, governo espiritual e impacto atmosférico."</p>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="https://loja.uiclap.com/titulo/ua121453/" target="_blank" rel="noopener" class="bg-brand-navy text-white px-8 py-4 rounded-full font-bold flex items-center gap-2 hover:bg-brand-gold transition-all group">
+                            Garantir meu exemplar
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-1 transition-transform"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                        </a>
+                        <a href="#livro" class="border border-brand-navy/20 px-8 py-4 rounded-full font-bold hover:bg-brand-navy hover:text-white transition-all">Saiba mais</a>
+                    </div>
+                </div>
+
+                <div class="relative reveal" style="--stagger:1">
+                    <div class="w-full max-w-[400px] mx-auto shadow-2xl rounded-lg overflow-hidden transform hover:scale-105 transition-transform duration-500">
+                        <img src="assets/images/livro-na-mao-hero.jpg" alt="Gabriel Marques segurando o livro Princípios da Adoração" width="524" height="700" fetchpriority="high" loading="eager" class="w-full h-auto aspect-[3/4] object-cover">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Book Section -->
+        <section id="livro" class="py-24 bg-white">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="grid md:grid-cols-2 gap-12 md:gap-20 items-center">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="space-y-4">
+                            <img src="assets/images/photo-2.jpg" alt="Gabriel Marques conduzindo a adoração com guitarra" width="700" height="933" loading="lazy" class="reveal rounded-2xl grayscale hover:grayscale-0 transition-all duration-700" style="--stagger:0">
+                            <div class="aspect-square rounded-2xl overflow-hidden relative reveal" style="--stagger:1">
+                                <button type="button" class="yt-facade group absolute inset-0 w-full h-full" data-yt-id="gCcOFZt99_c" aria-label="Assistir vídeo: Efraim - Gabriel Marques | Versão Estúdio">
+                                    <img src="https://i.ytimg.com/vi/gCcOFZt99_c/maxresdefault.jpg" alt="" width="1280" height="720" loading="lazy" class="w-full h-full object-cover">
+                                    <span class="absolute inset-0 bg-brand-navy/20 group-hover:bg-brand-navy/35 transition-colors"></span>
+                                    <span class="absolute inset-0 flex items-center justify-center">
+                                        <span class="w-10 h-10 rounded-full bg-white/25 backdrop-blur-sm border border-white/40 flex items-center justify-center group-hover:bg-white/40 transition-colors">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="#FFFFFF" class="translate-x-0.5"><path d="M8 5v14l11-7z"/></svg>
+                                        </span>
+                                    </span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="space-y-4 pt-12">
+                            <div class="aspect-square rounded-2xl overflow-hidden relative reveal" style="--stagger:2">
+                                <button type="button" class="yt-facade group absolute inset-0 w-full h-full" data-yt-id="ABgdHfiEJ10" aria-label="Assistir vídeo: A Boa Terra - Gabriel Marques | Parábola do Semeador">
+                                    <img src="https://i.ytimg.com/vi/ABgdHfiEJ10/maxresdefault.jpg" alt="" width="1280" height="720" loading="lazy" class="w-full h-full object-cover">
+                                    <span class="absolute inset-0 bg-brand-navy/20 group-hover:bg-brand-navy/35 transition-colors"></span>
+                                    <span class="absolute inset-0 flex items-center justify-center">
+                                        <span class="w-10 h-10 rounded-full bg-white/25 backdrop-blur-sm border border-white/40 flex items-center justify-center group-hover:bg-white/40 transition-colors">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="#FFFFFF" class="translate-x-0.5"><path d="M8 5v14l11-7z"/></svg>
+                                        </span>
+                                    </span>
+                                </button>
+                            </div>
+                            <img src="assets/images/photo-1.jpg" alt="Mockup 3D da capa do livro Princípios da Adoração" width="700" height="1050" loading="lazy" class="reveal rounded-2xl shadow-lg" style="--stagger:3">
+                        </div>
+                    </div>
+                    <div class="reveal" style="--stagger:4">
+                        <h2 class="text-4xl md:text-5xl font-serif mb-8">Mais que um livro, um <span class="italic text-brand-gold">manifesto</span>.</h2>
+                        <p class="text-brand-navy/80 leading-relaxed mb-6">Em tempos onde a adoração muitas vezes se confunde com entretenimento, este livro nos conduz de volta à essência profética.</p>
+                        <blockquote class="border-l-2 border-brand-gold pl-6 italic font-serif text-lg text-brand-navy/70 mb-6">"A adoração verdadeira não se trata de uma técnica perfeita, não se trata de entretenimento, não é performance — é uma extensão do som que ressoa no trono de Deus."</blockquote>
+                        <div class="mt-12 flex flex-col sm:flex-row gap-4">
+                            <a href="https://www.amazon.com.br/dp/B0FTQVZ75G" target="_blank" rel="noopener" class="flex-1 bg-brand-navy text-white px-8 py-4 rounded-xl font-bold text-center hover:bg-brand-gold transition-all">Comprar eBook</a>
+                            <a href="https://loja.uiclap.com/titulo/ua121453/" target="_blank" rel="noopener" class="flex-1 border border-brand-navy/20 px-8 py-4 rounded-xl font-bold text-center hover:bg-brand-navy transition-all">Livro Físico</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Os 3 Modelos de Adoração -->
+        <section class="py-24 bg-white border-t border-brand-navy/5">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="text-center mb-16">
+                    <span class="text-brand-gold font-bold uppercase tracking-[0.3em] text-xs mb-4 block">Direto do livro</span>
+                    <h2 class="text-4xl md:text-5xl font-serif">Os 3 modelos de <span class="italic text-brand-gold">adoração</span></h2>
+                </div>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="reveal p-10 rounded-3xl bg-brand-warm/50 border border-brand-navy/5" style="--stagger:0">
+                        <span class="text-brand-gold text-xs font-bold uppercase tracking-widest">Convencional</span>
+                        <h4 class="text-xl font-bold mt-2 mb-4">Celebrando quem Deus é e o que Ele faz</h4>
+                        <p class="text-brand-navy/60">Uma adoração vertical, de nós para Deus — gratidão, contemplação e rendição diante de Sua grandeza e bondade.</p>
+                    </div>
+                    <div class="reveal p-10 rounded-3xl bg-brand-warm/50 border border-brand-navy/5" style="--stagger:1">
+                        <span class="text-brand-gold text-xs font-bold uppercase tracking-widest">Profética</span>
+                        <h4 class="text-xl font-bold mt-2 mb-4">Espelhando o Céu e Anunciando o Reino</h4>
+                        <p class="text-brand-navy/60">Rompe os limites do tempo natural e se alinha com o que já está acontecendo nos céus, trazendo o eterno para o agora.</p>
+                    </div>
+                    <div class="reveal p-10 rounded-3xl bg-brand-warm/50 border border-brand-navy/5" style="--stagger:2">
+                        <span class="text-brand-gold text-xs font-bold uppercase tracking-widest">Intercessora</span>
+                        <h4 class="text-xl font-bold mt-2 mb-4">Guerra Espiritual Cantada</h4>
+                        <p class="text-brand-navy/60">A junção da música com a oração de guerra — clama, profetiza, libera decretos e entra em combate espiritual.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="sobre" class="py-24 bg-brand-navy text-white overflow-hidden relative section-blend section-blend--from-white">
+            <div class="max-w-7xl mx-auto px-6 relative z-10">
+                <div class="grid md:grid-cols-2 gap-16 items-center">
+                    <div class="reveal" style="--stagger:0">
+                        <span class="text-brand-gold font-bold uppercase tracking-[0.3em] text-[10px] mb-4 block">A Voz por trás da Mensagem</span>
+                        <h2 class="text-5xl font-serif mb-8">Quem é Gabriel Marques?</h2>
+                        <p class="text-white/70 text-lg mb-8 leading-relaxed">Gabriel carrega uma mensagem que desperta e realinha. Com mais de 15 anos servindo em ministérios de louvor e MBA pela FGV, ele combina espiritualidade profunda com excelência estratégica.</p>
+                    </div>
+                    <div class="flex justify-center relative reveal" style="--stagger:1">
+                        <div class="w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-brand-gold/30 shadow-2xl relative z-10">
+                            <img src="assets/images/gabriel-portrait.jpg" alt="Foto de Gabriel Marques" width="640" height="640" loading="lazy" class="w-full h-full object-cover">
+                        </div>
+                        <div class="absolute -bottom-6 -right-6 glass-card p-6 rounded-2xl max-w-xs text-brand-navy z-20">
+                            <p class="italic font-serif text-lg leading-snug">"Minha missão é servir a igreja local com intensidade, verdade e excelência."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Podcast Section -->
+        <section id="podcast" class="py-24 bg-brand-warm section-blend section-blend--from-navy">
+            <div class="max-w-7xl mx-auto px-6 text-center mb-16">
+                <h2 class="text-5xl font-serif mb-6">ARCO Podcast</h2>
+                <p class="text-brand-navy/70 text-lg">O instrumento para alinhar e lançar pessoas na direção do seu propósito.</p>
+            </div>
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="navy-gradient rounded-[2.5rem] p-8 md:p-12 text-white shadow-2xl flex flex-col md:flex-row gap-12 items-center reveal" style="--stagger:0">
+                    <div class="w-48 h-48 bg-white/10 rounded-3xl overflow-hidden shrink-0 shadow-xl">
+                        <img id="podcast-cover" src="https://d3t3ozftmdmh3i.cloudfront.net/staging/podcast_uploaded_nologo/44809495/44809495-1763174484093-3d2c2f2f6134c.jpg" alt="Capa do episódio mais recente do ARCO Podcast" width="800" height="800" loading="lazy" class="w-full h-full object-cover">
+                    </div>
+                    <div class="flex-1 text-center md:text-left w-full">
+                        <span class="px-3 py-1 bg-brand-gold text-brand-navy text-[10px] font-bold uppercase rounded-full mb-4 inline-block">Último Episódio</span>
+                        <h3 id="podcast-title" class="text-3xl md:text-4xl font-serif mb-6">Ep.20 | Envio</h3>
+
+                        <audio id="podcast-audio" controls preload="none" class="w-full mb-6 rounded-full">
+                            <source id="podcast-audio-source" src="https://anchor.fm/s/10bae737c/podcast/play/125886412/https%3A%2F%2Fd3ctxlq1ktw2nl.cloudfront.net%2Fstaging%2F2026-8-17%2F432102493-44100-2-38ea2b20df883.mp3" type="audio/mpeg">
+                            Seu navegador não suporta áudio incorporado.
+                        </audio>
+
+                        <a id="podcast-spotify-link" href="https://podcasters.spotify.com/pod/show/arcopodcast/episodes/Ep-20--Envio-e3p08gc" target="_blank" rel="noopener" class="bg-brand-gold text-brand-navy hover:opacity-90 px-6 py-3 rounded-full text-xs font-bold transition-all inline-flex items-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm4.5 14.5c-.2.3-.5.4-.8.2-2.2-1.3-4.9-1.6-8.2-.9-.3.1-.6-.1-.7-.4-.1-.3.1-.6.4-.7 3.5-.8 6.5-.4 9 1 .3.2.4.5.3.8Zm1.2-2.7c-.2.4-.6.5-1 .3-2.5-1.5-6.3-2-9.3-1.1-.4.1-.8-.1-.9-.5-.1-.4.1-.8.5-.9 3.4-1 7.6-.5 10.5 1.2.3.2.5.6.2 1Zm.1-2.8C14.6 9.3 9.5 9.1 6.5 10c-.5.1-1-.2-1.1-.6-.1-.5.2-1 .6-1.1 3.5-1 9.1-.8 12.7 1.3.4.3.6.8.3 1.3-.3.4-.9.5-1.3.2Z"/></svg>
+                            Ouvir no Spotify
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Course Section (Summary) -->
+        <section id="curso" class="py-24 bg-brand-navy text-white relative overflow-hidden section-blend section-blend--from-warm">
+            <div class="absolute top-0 left-0 w-full h-full opacity-5 pointer-events-none">
+                <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,_#D4AF37_0%,_transparent_70%)] opacity-20"></div>
+            </div>
+            <div class="max-w-7xl mx-auto px-6 relative z-10">
+                <div class="grid lg:grid-cols-2 gap-16 items-center">
+                    <div class="reveal" style="--stagger:0">
+                        <span class="text-brand-gold font-bold uppercase tracking-[0.3em] text-xs mb-4 block">Experiência Imersiva</span>
+                        <h2 class="text-4xl md:text-5xl font-serif mb-8">Curso Presencial <br /><span class="italic text-brand-gold text-6xl md:text-7xl">Princípios da Adoração</span></h2>
+                        <p class="text-white/70 text-lg mb-10 leading-relaxed">Uma jornada intensiva de 2 dias para mergulhar nos fundamentos bíblicos e práticos da adoração. Ideal para equipes de louvor e líderes.</p>
+                        <div class="flex flex-wrap gap-4">
+                            <a href="https://api.whatsapp.com/send/?phone=5521986100709" target="_blank" rel="noopener" class="gold-gradient text-brand-navy px-8 py-4 rounded-full font-bold text-base hover:opacity-90 transition-all shadow-xl shadow-brand-gold/10">Quero ser avisado</a>
+                            <a href="#" onclick="showView('course', event)" class="border border-white/20 text-white px-8 py-4 rounded-full font-bold text-base hover:bg-white/10 transition-all flex items-center gap-2 group">
+                                Saiba mais
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-1 transition-transform"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="relative reveal" style="--stagger:1">
+                        <div class="aspect-video rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
+                            <img src="assets/images/curso-ministracao.jpg" alt="Gabriel Marques ministrando e orando por pessoas em um evento" width="1080" height="608" loading="lazy" class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contato" class="py-24 bg-white section-blend section-blend--from-navy">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="bg-brand-navy rounded-[3rem] p-10 md:p-20 text-white relative overflow-hidden reveal" style="--stagger:0">
+                    <div class="absolute top-0 right-0 w-64 h-64 bg-brand-gold/10 rounded-full blur-3xl -mr-32 -mt-32"></div>
+                    <div class="relative z-10 max-w-3xl">
+                        <h2 class="text-4xl md:text-5xl font-serif mb-8 leading-tight">Leve esta mensagem para sua <span class="italic text-brand-gold">igreja ou evento</span>.</h2>
+                        <p class="text-white/60 text-lg mb-10">Será uma alegria caminhar com vocês em um tempo de restauração, cura, libertação e ativação profética.</p>
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <a href="https://api.whatsapp.com/send/?phone=5521986100709&text=Olá! Gostaria de conversar sobre levar o Gabriel para minha igreja ou evento." target="_blank" rel="noopener" class="flex-1 bg-[#25D366] text-white px-8 py-4 rounded-xl font-bold text-center hover:opacity-90 transition-all flex items-center justify-center gap-3">
+                                <svg viewBox="0 0 24 24" class="w-5 h-5 fill-current shrink-0" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                                Falar no WhatsApp
+                            </a>
+                            <a href="mailto:gmarques@outlook.com" class="flex-1 border border-white/20 px-8 py-4 rounded-xl font-bold text-center hover:bg-white/10 transition-all flex items-center justify-center gap-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                                gmarques@outlook.com
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- VIEW: COURSE DETAILS -->
+    <div id="view-course" class="view font-sales">
+        <!-- Barra de navegação interna -->
+        <div class="bg-brand-navy border-b border-white/10">
+            <div class="max-w-7xl mx-auto px-6 h-14 flex items-center justify-between gap-6 overflow-x-auto">
+                <a href="#" onclick="showView('home', event)" class="shrink-0 inline-flex items-center gap-2 text-white/50 hover:text-brand-gold transition-colors font-bold uppercase tracking-widest text-[10px]">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="rotate-180"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                    Início
+                </a>
+                <div class="flex items-center gap-6 text-[10px] font-bold uppercase tracking-widest text-white/60 whitespace-nowrap">
+                    <a href="#curso-sobre" class="hover:text-brand-gold transition-colors">Sobre</a>
+                    <a href="#curso-galeria" class="hover:text-brand-gold transition-colors">Galeria</a>
+                    <a href="#curso-programacao" class="hover:text-brand-gold transition-colors">Programação</a>
+                    <a href="#curso-instrutor" class="hover:text-brand-gold transition-colors">Instrutor</a>
+                    <a href="#investimento" class="bg-brand-gold text-brand-navy px-4 py-2 rounded-full hover:opacity-90 transition-all">Garantir Vaga</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Hero Course -->
+        <section class="relative min-h-[85vh] flex items-end overflow-hidden">
+            <div class="absolute inset-0">
+                <img src="assets/images/photo-2.jpg" alt="Gabriel Marques conduzindo a adoração" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-brand-navy via-brand-navy/85 to-brand-navy/50"></div>
+            </div>
+
+            <div class="max-w-7xl mx-auto px-6 pb-16 pt-40 relative z-10 w-full grid md:grid-cols-[1.3fr_1fr] gap-10 items-end">
+                <div>
+                    <span class="text-brand-gold text-xs font-bold uppercase tracking-[0.3em] mb-5 block">Imersão Profética &amp; Técnica</span>
+                    <h1 class="text-white leading-[0.95]">
+                        <span class="block text-3xl md:text-5xl font-serif font-light">Curso Presencial</span>
+                        <span class="block text-5xl md:text-7xl font-serif font-bold">Princípios da Adoração</span>
+                    </h1>
+                </div>
+                <div class="md:pb-2">
+                    <p class="italic font-serif text-white/70 text-lg md:text-xl leading-relaxed mb-3">Uma experiência exclusiva para ministros que desejam alinhar seu som ao coração de Deus e elevar o nível da sua entrega no altar.</p>
+                    <p class="text-brand-gold font-serif italic mb-8">"Sua vida é o palco. Sua voz é o instrumento."</p>
+                    <div class="flex flex-wrap gap-3 mb-8 text-[10px] font-bold uppercase tracking-widest text-white/60">
+                        <span class="border border-white/20 rounded-full px-4 py-2">2 Dias Intensivos</span>
+                        <span class="border border-white/20 rounded-full px-4 py-2">Vagas Limitadas</span>
+                        <span class="border border-white/20 rounded-full px-4 py-2">Certificado Incluso</span>
+                    </div>
+                    <a href="#investimento" class="inline-flex items-center gap-2 bg-brand-gold text-brand-navy px-8 py-4 font-bold uppercase text-xs tracking-widest hover:opacity-90 transition-all">
+                        Garantir minha vaga
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- O que é o curso -->
+        <section id="curso-sobre" class="py-24 bg-white">
+            <div class="max-w-6xl mx-auto px-6">
+                <div class="grid md:grid-cols-2 gap-10 mb-16">
+                    <h2 class="text-4xl md:text-5xl font-serif leading-tight">O que é o <span class="italic text-brand-gold">curso</span></h2>
+                    <p class="italic font-serif text-brand-navy/60 text-lg leading-relaxed">Uma imersão de 2 dias para quem serve no altar e quer alinhar seu som ao coração de Deus, saindo com ferramentas práticas para levar de volta à sua igreja local.</p>
+                </div>
+
+                <div class="bg-brand-navy text-white p-10 md:p-16 mb-16">
+                    <p class="italic font-serif text-xl md:text-2xl leading-relaxed">"A adoração verdadeira não se trata de uma técnica perfeita, não se trata de entretenimento, não é performance — é uma extensão do som que ressoa no trono de Deus."</p>
+                    <div class="w-12 h-0.5 bg-brand-gold my-6"></div>
+                    <p class="text-white/60 leading-relaxed max-w-2xl">É esse o espírito que guia cada módulo do curso: teologia do som, dinâmica de banda e fluidez profética, para que você volte pra sua igreja equipado para formar uma equipe de adoração madura e poderosa.</p>
+                </div>
+
+                <span class="text-brand-gold font-bold uppercase tracking-[0.3em] text-xs mb-3 block">Este curso é para você</span>
+                <p class="text-brand-navy/60 mb-6 max-w-2xl">Como o próprio livro ensina: "independente de em que área estamos, se cantando ou tocando, somos todos ministros." Esse é o ponto de partida do curso — e isso inclui você:</p>
+                <div class="grid sm:grid-cols-2 gap-6 text-left">
+                    <div class="reveal flex items-start gap-4 p-6 bg-brand-warm/50" style="--stagger:0">
+                        <span class="w-8 h-8 rounded-full bg-brand-gold/20 text-brand-gold flex items-center justify-center shrink-0 mt-0.5"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+                        <p class="font-medium">Ministros de louvor, cantores e músicos que querem alinhar sua entrega ao coração de Deus.</p>
+                    </div>
+                    <div class="reveal flex items-start gap-4 p-6 bg-brand-warm/50" style="--stagger:1">
+                        <span class="w-8 h-8 rounded-full bg-brand-gold/20 text-brand-gold flex items-center justify-center shrink-0 mt-0.5"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+                        <p class="font-medium">Líderes de adoração e pastores responsáveis por formar equipes.</p>
+                    </div>
+                    <div class="reveal flex items-start gap-4 p-6 bg-brand-warm/50" style="--stagger:2">
+                        <span class="w-8 h-8 rounded-full bg-brand-gold/20 text-brand-gold flex items-center justify-center shrink-0 mt-0.5"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+                        <p class="font-medium">Intercessores e artistas proféticos que buscam fluidez espiritual no altar.</p>
+                    </div>
+                    <div class="reveal flex items-start gap-4 p-6 bg-brand-warm/50" style="--stagger:3">
+                        <span class="w-8 h-8 rounded-full bg-brand-gold/20 text-brand-gold flex items-center justify-center shrink-0 mt-0.5"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+                        <p class="font-medium">Equipes de louvor inteiras que querem crescer juntas em unidade sonora.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Galeria -->
+        <section id="curso-galeria" class="py-24 bg-brand-navy text-white relative overflow-hidden">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="mb-12">
+                    <span class="text-brand-gold font-bold uppercase tracking-[0.3em] text-xs mb-4 block">Galeria</span>
+                    <h2 class="text-4xl md:text-5xl font-serif">O clima da <span class="italic text-brand-gold">experiência</span></h2>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-5 gap-0">
+                    <div class="reveal relative aspect-square overflow-hidden col-span-1 row-span-1 md:col-span-2 md:row-span-2" style="--stagger:0">
+                        <img src="assets/images/photo-2.jpg" alt="Gabriel Marques conduzindo a adoração" width="700" height="933" loading="lazy" class="w-full h-full object-cover">
+                        <span class="absolute inset-0 bg-gradient-to-t from-brand-navy/80 via-brand-navy/0 to-transparent"></span>
+                        <span class="absolute bottom-4 left-4 text-xs font-bold uppercase tracking-[0.2em]">Intensidade</span>
+                    </div>
+                    <div class="reveal relative aspect-square overflow-hidden" style="--stagger:1">
+                        <img src="assets/images/curso-ministracao.jpg" alt="Gabriel Marques ministrando" width="1080" height="608" loading="lazy" class="w-full h-full object-cover">
+                        <span class="absolute inset-0 bg-gradient-to-t from-brand-navy/80 via-brand-navy/0 to-transparent"></span>
+                        <span class="absolute bottom-4 left-4 text-xs font-bold uppercase tracking-[0.2em]">Verdade</span>
+                    </div>
+                    <div class="reveal relative aspect-square overflow-hidden" style="--stagger:2">
+                        <img src="assets/images/gabriel-portrait.jpg" alt="Foto de Gabriel Marques" width="640" height="640" loading="lazy" class="w-full h-full object-cover">
+                        <span class="absolute inset-0 bg-gradient-to-t from-brand-navy/80 via-brand-navy/0 to-transparent"></span>
+                        <span class="absolute bottom-4 left-4 text-xs font-bold uppercase tracking-[0.2em]">Excelência</span>
+                    </div>
+                    <div class="reveal relative aspect-square overflow-hidden" style="--stagger:3">
+                        <img src="assets/images/grupo-ciam-music.jpg" alt="Equipe da CIAM Music reunida" width="700" height="700" loading="lazy" class="w-full h-full object-cover">
+                        <span class="absolute inset-0 bg-gradient-to-t from-brand-navy/80 via-brand-navy/0 to-transparent"></span>
+                        <span class="absolute bottom-4 left-4 text-xs font-bold uppercase tracking-[0.2em]">Comunidade</span>
+                    </div>
+                    <div class="reveal relative aspect-square overflow-hidden" style="--stagger:4">
+                        <img src="assets/images/course-workshop.jpg" alt="Banda da CIAM Music tocando no altar" width="1080" height="608" loading="lazy" class="w-full h-full object-cover">
+                        <span class="absolute inset-0 bg-gradient-to-t from-brand-navy/80 via-brand-navy/0 to-transparent"></span>
+                        <span class="absolute bottom-4 left-4 text-xs font-bold uppercase tracking-[0.2em]">Unidade</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Modules -->
+        <section class="py-24 bg-white">
+            <div class="max-w-7xl mx-auto px-6">
+                <h2 class="text-4xl md:text-5xl font-serif mb-16 text-center">O que você vai <span class="italic text-brand-gold">aprender</span></h2>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="reveal p-10 rounded-3xl bg-brand-warm/50 border border-brand-navy/5 hover:border-brand-gold/30 transition-all group" style="--stagger:0">
+                        <div class="w-12 h-12 bg-brand-navy text-brand-gold rounded-2xl flex items-center justify-center mb-6"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
+                        <h4 class="text-xl font-bold mb-4">Teologia do Som</h4>
+                        <p class="text-brand-navy/60">A base bíblica para a música no Reino e o papel espiritual do levita no Tabernáculo.</p>
+                    </div>
+                    <div class="reveal p-10 rounded-3xl bg-brand-warm/50 border border-brand-navy/5 hover:border-brand-gold/30 transition-all group" style="--stagger:1">
+                        <div class="w-12 h-12 bg-brand-navy text-brand-gold rounded-2xl flex items-center justify-center mb-6"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
+                        <h4 class="text-xl font-bold mb-4">Dinâmica de Banda</h4>
+                        <p class="text-brand-navy/60">Arranjos congregacionais, timbragem e como criar uma unidade sonora poderosa.</p>
+                    </div>
+                    <div class="reveal p-10 rounded-3xl bg-brand-warm/50 border border-brand-navy/5 hover:border-brand-gold/30 transition-all group" style="--stagger:2">
+                        <div class="w-12 h-12 bg-brand-navy text-brand-gold rounded-2xl flex items-center justify-center mb-6"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg></div>
+                        <h4 class="text-xl font-bold mb-4">Fluidez Profética</h4>
+                        <p class="text-brand-navy/60">Como conduzir momentos espontâneos e ler o ambiente espiritual durante o louvor.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Programação -->
+        <section id="curso-programacao" class="py-24 bg-brand-navy text-white relative overflow-hidden">
+            <div class="max-w-5xl mx-auto px-6">
+                <div class="text-center mb-16">
+                    <span class="text-brand-gold font-bold uppercase tracking-[0.3em] text-xs mb-4 block">Como funciona</span>
+                    <h2 class="text-4xl md:text-5xl font-serif">Programação dos <span class="italic text-brand-gold">2 dias</span></h2>
+                </div>
+                <div class="grid md:grid-cols-2 gap-12">
+                    <div>
+                        <h3 class="text-2xl font-serif text-brand-gold mb-8">Dia 1 — Fundamento</h3>
+                        <div class="space-y-8 border-l border-white/10 pl-8">
+                            <div class="reveal relative" style="--stagger:0">
+                                <span class="absolute -left-[2.35rem] top-1 w-3 h-3 rounded-full bg-brand-gold"></span>
+                                <span class="text-[10px] uppercase tracking-widest text-brand-gold font-bold">Manhã</span>
+                                <h4 class="text-lg font-bold mt-1 mb-1">Abertura e Teologia do Som</h4>
+                                <p class="text-white/60 text-sm leading-relaxed">Boas-vindas e mergulho na base bíblica da adoração e no papel espiritual do levita no Tabernáculo.</p>
+                            </div>
+                            <div class="reveal relative" style="--stagger:1">
+                                <span class="absolute -left-[2.35rem] top-1 w-3 h-3 rounded-full bg-brand-gold"></span>
+                                <span class="text-[10px] uppercase tracking-widest text-brand-gold font-bold">Tarde</span>
+                                <h4 class="text-lg font-bold mt-1 mb-1">Dinâmica de Banda</h4>
+                                <p class="text-white/60 text-sm leading-relaxed">Arranjos congregacionais, timbragem e como construir unidade sonora com o seu time.</p>
+                            </div>
+                            <div class="reveal relative" style="--stagger:2">
+                                <span class="absolute -left-[2.35rem] top-1 w-3 h-3 rounded-full bg-brand-gold"></span>
+                                <span class="text-[10px] uppercase tracking-widest text-brand-gold font-bold">Noite</span>
+                                <h4 class="text-lg font-bold mt-1 mb-1">Momento de Ministração</h4>
+                                <p class="text-white/60 text-sm leading-relaxed">Tempo de ativação e ministração em grupo, aplicando o que foi vivido ao longo do dia.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-serif text-brand-gold mb-8">Dia 2 — Prática</h3>
+                        <div class="space-y-8 border-l border-white/10 pl-8">
+                            <div class="reveal relative" style="--stagger:0">
+                                <span class="absolute -left-[2.35rem] top-1 w-3 h-3 rounded-full bg-brand-gold"></span>
+                                <span class="text-[10px] uppercase tracking-widest text-brand-gold font-bold">Manhã</span>
+                                <h4 class="text-lg font-bold mt-1 mb-1">Fluidez Profética</h4>
+                                <p class="text-white/60 text-sm leading-relaxed">Como conduzir momentos espontâneos e ler o ambiente espiritual durante o louvor.</p>
+                            </div>
+                            <div class="reveal relative" style="--stagger:1">
+                                <span class="absolute -left-[2.35rem] top-1 w-3 h-3 rounded-full bg-brand-gold"></span>
+                                <span class="text-[10px] uppercase tracking-widest text-brand-gold font-bold">Tarde</span>
+                                <h4 class="text-lg font-bold mt-1 mb-1">Workshop em Banda</h4>
+                                <p class="text-white/60 text-sm leading-relaxed">Prática em grupo simulando um momento real de adoração, com direção ao vivo.</p>
+                            </div>
+                            <div class="reveal relative" style="--stagger:2">
+                                <span class="absolute -left-[2.35rem] top-1 w-3 h-3 rounded-full bg-brand-gold"></span>
+                                <span class="text-[10px] uppercase tracking-widest text-brand-gold font-bold">Noite</span>
+                                <h4 class="text-lg font-bold mt-1 mb-1">Encerramento e Envio</h4>
+                                <p class="text-white/60 text-sm leading-relaxed">Comissionamento final e direcionamento para aplicar os princípios na sua igreja local.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p class="text-white/40 text-xs text-center mt-16">Programação sujeita a pequenos ajustes conforme a turma.</p>
+            </div>
+        </section>
+
+        <!-- Quem vai te ensinar -->
+        <section id="curso-instrutor" class="py-24 bg-white">
+            <div class="max-w-5xl mx-auto px-6">
+                <div class="grid md:grid-cols-[auto_1fr] gap-12 items-center">
+                    <div class="reveal flex justify-center" style="--stagger:0">
+                        <div class="w-48 h-48 rounded-full overflow-hidden border-4 border-brand-gold/30 shadow-xl shrink-0">
+                            <img src="assets/images/gabriel-portrait.jpg" alt="Foto de Gabriel Marques" width="640" height="640" loading="lazy" class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                    <div class="reveal text-center md:text-left" style="--stagger:1">
+                        <span class="text-brand-gold font-bold uppercase tracking-[0.3em] text-xs mb-4 block">Quem vai te ensinar</span>
+                        <h2 class="text-3xl md:text-4xl font-serif mb-6">Gabriel Marques</h2>
+                        <p class="text-brand-navy/70 leading-relaxed mb-4">Com mais de 15 anos servindo em ministérios de louvor e MBA pela FGV, Gabriel combina espiritualidade profunda com excelência estratégica. Autor do livro <em class="not-italic font-semibold">Princípios da Adoração</em> e apresentador do ARCO Podcast, ele conduz esta imersão com a mesma intensidade e verdade que marcam sua mensagem.</p>
+                        <p class="italic font-serif text-brand-gold">"Quem se levantará como trombeta viva em sua geografia, em sua comunidade, em sua igreja local?"</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Investimento -->
+        <section class="py-24 bg-brand-warm" id="investimento">
+            <div class="max-w-5xl mx-auto px-6">
+                <div class="grid md:grid-cols-2 gap-10 mb-16">
+                    <div>
+                        <span class="text-brand-navy/40 uppercase tracking-widest text-xs font-bold mb-2 block">Investimento</span>
+                        <h2 class="text-4xl md:text-5xl font-serif leading-tight">Sua <span class="italic text-brand-gold">experiência</span></h2>
+                    </div>
+                    <p class="italic font-serif text-brand-navy/60 text-lg leading-relaxed">Dois dias de imersão completa — aulas, prática em banda e um tempo de ministração que você leva de volta pra sua igreja local.</p>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="reveal bg-brand-gold text-brand-navy p-10 md:p-12" style="--stagger:0">
+                        <span class="uppercase tracking-widest text-xs font-bold opacity-70">Presencial</span>
+                        <div class="flex items-center gap-2 mt-3 mb-1">
+                            <span class="text-2xl font-bold opacity-60">R$</span>
+                            <span class="text-5xl font-serif font-bold">497</span>
+                            <span class="text-lg opacity-60">,00</span>
+                        </div>
+                        <p class="text-xs opacity-70 mb-8">Pagamento único</p>
+                        <ul class="space-y-3 mb-10">
+                            <li class="flex items-center gap-3 font-medium"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="shrink-0"><path d="M20 6 9 17l-5-5"/></svg>2 dias de imersão presencial</li>
+                            <li class="flex items-center gap-3 font-medium"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="shrink-0"><path d="M20 6 9 17l-5-5"/></svg>Certificado de participação</li>
+                            <li class="flex items-center gap-3 font-medium"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="shrink-0"><path d="M20 6 9 17l-5-5"/></svg>Material do curso incluso</li>
+                            <li class="flex items-center gap-3 font-medium"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="shrink-0"><path d="M20 6 9 17l-5-5"/></svg>Coffee break nos dois dias</li>
+                        </ul>
+                        <a href="https://api.whatsapp.com/send/?phone=5521986100709&text=Olá! Quero garantir minha vaga no curso presencial." target="_blank" rel="noopener" class="w-full block bg-brand-navy text-white px-10 py-5 font-bold text-lg hover:opacity-90 transition-all flex items-center justify-center gap-3 group">
+                            Garantir minha Vaga
+                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-2 transition-transform"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                        </a>
+                    </div>
+
+                    <div class="reveal bg-brand-navy text-white p-10 md:p-12" style="--stagger:1">
+                        <span class="uppercase tracking-widest text-xs font-bold opacity-60">Online (ao vivo)</span>
+                        <div class="flex items-center gap-2 mt-3 mb-1">
+                            <span class="text-2xl font-bold opacity-60">10x</span>
+                            <span class="text-5xl font-serif font-bold">R$30</span>
+                            <span class="text-lg opacity-60">,00</span>
+                        </div>
+                        <p class="text-xs opacity-60 mb-8">Transmissão ao vivo, junto com a turma presencial</p>
+                        <ul class="space-y-3 mb-10">
+                            <li class="flex items-center gap-3 font-medium"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="shrink-0"><path d="M20 6 9 17l-5-5"/></svg>2 dias de aulas ao vivo</li>
+                            <li class="flex items-center gap-3 font-medium"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="shrink-0"><path d="M20 6 9 17l-5-5"/></svg>Material do curso em PDF</li>
+                            <li class="flex items-center gap-3 font-medium opacity-40"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="shrink-0"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>Certificado não incluso</li>
+                            <li class="flex items-center gap-3 font-medium opacity-40"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="shrink-0"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>Coffee break não se aplica</li>
+                        </ul>
+                        <a href="https://api.whatsapp.com/send/?phone=5521986100709&text=Olá! Quero garantir minha vaga no curso online." target="_blank" rel="noopener" class="w-full block bg-brand-gold text-brand-navy px-10 py-5 font-bold text-lg hover:opacity-90 transition-all flex items-center justify-center gap-3 group">
+                            Garantir minha Vaga
+                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-2 transition-transform"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                        </a>
+                    </div>
+                </div>
+                <p class="text-brand-navy/60 text-xs mt-8 text-center">Dúvidas? <a href="https://api.whatsapp.com/send/?phone=5521986100709&text=Olá! Tenho uma dúvida sobre o curso." target="_blank" rel="noopener" class="underline hover:text-brand-gold">Fale com a gente no WhatsApp</a>.</p>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section class="py-24 bg-brand-navy text-white">
+            <div class="max-w-3xl mx-auto px-6">
+                <div class="mb-16">
+                    <span class="text-brand-gold font-bold uppercase tracking-[0.3em] text-xs mb-4 block">Dúvidas</span>
+                    <h2 class="text-4xl md:text-5xl font-serif">Perguntas <span class="italic text-brand-gold">frequentes</span></h2>
+                </div>
+                <div class="divide-y divide-white/10 border-t border-b border-white/10">
+                    <details class="reveal group py-6" style="--stagger:0">
+                        <summary class="font-bold cursor-pointer list-none flex items-center justify-between gap-4 group-open:text-brand-gold transition-colors">
+                            Preciso ter experiência musical para participar?
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 transition-transform group-open:rotate-45"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
+                        </summary>
+                        <p class="text-white/50 mt-4 leading-relaxed">Não. O curso é voltado tanto para músicos e cantores quanto para quem serve de outras formas no ministério de adoração — intercessores, dançarinos, artistas proféticos e líderes.</p>
+                    </details>
+                    <details class="reveal group py-6" style="--stagger:1">
+                        <summary class="font-bold cursor-pointer list-none flex items-center justify-between gap-4 group-open:text-brand-gold transition-colors">
+                            Onde será realizado o curso?
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 transition-transform group-open:rotate-45"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
+                        </summary>
+                        <p class="text-white/50 mt-4 leading-relaxed">Data e local serão divulgados diretamente para quem já garantiu a vaga. Fale com a gente no WhatsApp para ser avisado assim que abrirem as próximas turmas.</p>
+                    </details>
+                    <details class="reveal group py-6" style="--stagger:2">
+                        <summary class="font-bold cursor-pointer list-none flex items-center justify-between gap-4 group-open:text-brand-gold transition-colors">
+                            Vou receber certificado?
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 transition-transform group-open:rotate-45"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
+                        </summary>
+                        <p class="text-white/50 mt-4 leading-relaxed">Sim, todos os participantes recebem certificado de participação ao final dos 2 dias de imersão.</p>
+                    </details>
+                    <details class="reveal group py-6" style="--stagger:3">
+                        <summary class="font-bold cursor-pointer list-none flex items-center justify-between gap-4 group-open:text-brand-gold transition-colors">
+                            Posso levar minha equipe de louvor?
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 transition-transform group-open:rotate-45"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
+                        </summary>
+                        <p class="text-white/50 mt-4 leading-relaxed">Sim! O curso é ainda mais poderoso quando vivido em equipe — líderes costumam trazer seus times para sair com uma unidade sonora já alinhada.</p>
+                    </details>
+                    <details class="reveal group py-6" style="--stagger:4">
+                        <summary class="font-bold cursor-pointer list-none flex items-center justify-between gap-4 group-open:text-brand-gold transition-colors">
+                            Como garanto minha vaga?
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 transition-transform group-open:rotate-45"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
+                        </summary>
+                        <p class="text-white/50 mt-4 leading-relaxed">Basta falar com a gente pelo WhatsApp usando o botão "Garantir minha Vaga" nesta página — como as vagas são limitadas, a reserva é por ordem de contato.</p>
+                    </details>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Final -->
+        <section class="py-20 bg-brand-gold relative overflow-hidden">
+            <div class="max-w-3xl mx-auto px-6 text-center relative z-10">
+                <p class="italic font-serif text-brand-navy/70 text-lg mb-4">"Seja você o som que faltava."</p>
+                <h2 class="text-3xl md:text-4xl font-serif mb-8 text-brand-navy">Pronto para viver essa <span class="italic">experiência</span>?</h2>
+                <a href="#investimento" class="inline-flex items-center gap-2 bg-brand-navy text-white px-10 py-5 font-bold text-lg hover:opacity-90 transition-all">
+                    Garantir minha vaga agora
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg>
+                </a>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="py-12 bg-brand-warm border-t border-brand-navy/5">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8 text-center md:text-left">
+            <div>
+                <p class="font-serif text-xl font-bold mb-2">GABRIEL MARQUES</p>
+                <p class="text-[10px] text-brand-navy/40 uppercase tracking-widest">© <span id="current-year">2026</span> Todos os direitos reservados.</p>
+            </div>
+            <div class="flex gap-6">
+                <a href="https://api.whatsapp.com/send/?phone=5521986100709" target="_blank" rel="noopener" aria-label="WhatsApp" class="w-10 h-10 rounded-full border border-brand-navy/10 flex items-center justify-center hover:bg-brand-navy hover:text-white transition-all">
+                    <svg viewBox="0 0 24 24" class="w-5 h-5 fill-current" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                </a>
+                <a href="https://www.instagram.com/gmarques12/" target="_blank" rel="noopener" aria-label="Instagram" class="w-10 h-10 rounded-full border border-brand-navy/10 flex items-center justify-center hover:bg-brand-navy hover:text-white transition-all">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://api.whatsapp.com/send/?phone=5521986100709" target="_blank" rel="noopener" aria-label="Falar no WhatsApp" class="fixed bottom-6 right-6 z-[100] w-14 h-14 bg-[#25D366] text-white rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-transform">
+        <svg viewBox="0 0 24 24" class="w-8 h-8 fill-current" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    </a>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

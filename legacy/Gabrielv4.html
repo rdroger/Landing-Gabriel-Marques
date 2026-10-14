@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gabriel Marques - Princípios da Adoração</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Montserrat:wght@100..900&family=Caveat:wght@400..700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            navy: '#0A192F',
+                            gold: '#D4AF37',
+                            warm: '#F5F2ED',
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        sans: ['Montserrat', 'sans-serif'],
+                        hand: ['Caveat', 'cursive'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style type="text/css">
+        .glass-card {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        .gold-gradient {
+            background: linear-gradient(135deg, #D4AF37 0%, #F1D592 50%, #D4AF37 100%);
+        }
+
+        .navy-gradient {
+            background: linear-gradient(135deg, #0A192F 0%, #112240 100%);
+        }
+
+        @keyframes pulse-slow {
+            0%, 100% { opacity: 0.2; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(1.05); }
+        }
+        .animate-pulse-slow {
+            animation: pulse-slow 4s infinite ease-in-out;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #F5F2ED; }
+        ::-webkit-scrollbar-thumb { background: #D4AF37; border-radius: 10px; }
+
+        /* View Management */
+        .view { display: none; }
+        .view.active { display: block; }
+
+        /* Hide menu items based on view */
+        body.is-course .nav-home-only { display: none; }
+        body:not(.is-course) .nav-course-only { display: none; }
+    </style>
+</head>
+<body class="bg-brand-warm text-brand-navy font-sans antialiased selection:bg-brand-gold selection:text-brand-navy">
+
+    <!-- Navbar -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-brand-warm/80 backdrop-blur-md border-b border-brand-navy/5">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-4 md:gap-6">
+                <!-- Botão Home (Aumentado conforme solicitado) -->
+                <a href="#" onclick="showView('home')" class="flex items-center gap-2 text-brand-navy hover:text-brand-gold transition-all group scale-110 md:scale-125 origin-left" title="Voltar para Home">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                    <span class="hidden sm:inline text-xs font-bold uppercase tracking-widest">Home</span>
+                </a>
+                <div class="w-px h-8 bg-brand-navy/10 hidden sm:block"></div>
+                <span class="font-serif text-xl md:text-2xl font-bold tracking-tighter text-brand-navy uppercase" id="nav-title">Gabriel Marques</span>
+            </div>
+            
+            <!-- Menu Dinâmico -->
+            <div class="hidden lg:flex items-center gap-8 text-[10px] font-bold tracking-widest uppercase">
+                <!-- Links apenas da Home -->
+                <a href="#livro" class="nav-home-only hover:text-brand-gold transition-colors">O Livro</a>
+                <a href="#sobre" class="nav-home-only hover:text-brand-gold transition-colors">Sobre</a>
+                <a href="#podcast" class="nav-home-only hover:text-brand-gold transition-colors">Podcast</a>
+                <a href="#" onclick="showView('course')" class="nav-home-only hover:text-brand-gold transition-colors">Curso</a>
+                <a href="#contato" class="nav-home-only hover:text-brand-gold transition-colors">Contato</a>
+                
+                <!-- Links apenas do Curso -->
+                <a href="#" onclick="showView('home')" class="nav-course-only hover:text-brand-gold transition-colors">Início</a>
+                <span class="nav-course-only text-brand-gold">O Curso</span>
+            </div>
+
+            <a href="https://loja.uiclap.com/titulo/ua121453/" target="_blank" class="bg-brand-navy text-white px-5 md:px-6 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest hover:bg-brand-gold transition-all duration-300">
+                Comprar Livro
+            </a>
+        </div>
+    </nav>
+
+    <!-- VIEW: HOME -->
+    <div id="view-home" class="view active">
+        <!-- Hero Section -->
+        <section class="relative min-h-screen flex items-center pt-20 overflow-hidden">
+            <div class="absolute inset-0 z-0">
+                <div class="absolute top-0 left-0 w-full h-full bg-brand-warm opacity-90"></div>
+                <div class="absolute -top-24 -right-24 w-96 h-96 bg-brand-gold/10 rounded-full blur-3xl"></div>
+                <div class="absolute -bottom-24 -left-24 w-96 h-96 bg-brand-navy/5 rounded-full blur-3xl"></div>
+            </div>
+
+            <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center relative z-10">
+                <div>
+                    <span class="inline-block px-4 py-1 bg-brand-gold/10 text-brand-gold rounded-full text-[10px] font-bold uppercase tracking-widest mb-6">Lançamento Oficial</span>
+                    <h1 class="text-5xl sm:text-6xl md:text-8xl font-serif leading-[0.9] mb-8">Princípios da <br><span class="italic text-brand-gold font-hand lowercase text-7xl md:text-9xl">Adoração</span></h1>
+                    <p class="text-lg md:text-xl text-brand-navy/70 leading-relaxed mb-10 max-w-lg">Um manifesto profético para todos que servem no altar. Descubra os princípios eternos que governam o som no Reino de Deus.</p>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="https://loja.uiclap.com/titulo/ua121453/" target="_blank" class="bg-brand-navy text-white px-8 py-4 rounded-full font-bold flex items-center gap-2 hover:bg-brand-gold transition-all group">
+                            Garantir meu exemplar 
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-1 transition-transform"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                        </a>
+                        <a href="#livro" class="border border-brand-navy/20 px-8 py-4 rounded-full font-bold hover:bg-brand-navy hover:text-white transition-all">Saiba mais</a>
+                    </div>
+                </div>
+
+                <div class="relative">
+                    <div class="w-full max-w-[400px] mx-auto shadow-2xl rounded-lg overflow-hidden transform hover:scale-105 transition-transform duration-500">
+                        <div class="aspect-[3/4] relative bg-brand-navy flex flex-col items-center justify-center p-8 text-center overflow-hidden">
+                            <img src="https://picsum.photos/seed/worship/800/1200?blur=2" alt="Capa" class="absolute inset-0 w-full h-full object-cover opacity-40">
+                            <div class="relative z-10">
+                                <h2 class="text-white text-3xl font-serif mb-2 tracking-tight uppercase">Princípios da Adoração</h2>
+                                <div class="w-12 h-0.5 bg-brand-gold mx-auto mb-4"></div>
+                                <p class="text-white/80 text-[10px] uppercase tracking-[0.2em] mb-12">Ferramenta para uma nova geração</p>
+                                <p class="text-brand-gold font-serif text-xl italic font-hand">Gabriel L. N. Marques</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Book Section -->
+        <section id="livro" class="py-24 bg-white">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="grid md:grid-cols-2 gap-12 md:gap-20 items-center">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="space-y-4">
+                            <img src="https://picsum.photos/seed/church1/600/800" class="rounded-2xl grayscale hover:grayscale-0 transition-all duration-700">
+                            <div class="aspect-square bg-brand-gold/20 rounded-2xl flex items-center justify-center text-brand-gold">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M8 7h6"/><path d="M8 11h8"/></svg>
+                            </div>
+                        </div>
+                        <div class="space-y-4 pt-12">
+                            <div class="aspect-square bg-brand-navy rounded-2xl flex items-center justify-center text-white">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+                            </div>
+                            <img src="https://picsum.photos/seed/church2/600/800" class="rounded-2xl grayscale hover:grayscale-0 transition-all duration-700">
+                        </div>
+                    </div>
+                    <div>
+                        <h2 class="text-4xl md:text-5xl font-serif mb-8">Mais que um livro, um <span class="italic text-brand-gold">manifesto</span>.</h2>
+                        <p class="text-brand-navy/80 leading-relaxed mb-6">Em tempos onde a adoração muitas vezes se confunde com entretenimento, este livro nos conduz de volta à essência profética.</p>
+                        <div class="mt-12 flex flex-col sm:flex-row gap-4">
+                            <a href="https://www.amazon.com.br/dp/B0FTQVZ75G" target="_blank" class="flex-1 bg-brand-navy text-white px-8 py-4 rounded-xl font-bold text-center hover:bg-brand-gold transition-all">Comprar eBook</a>
+                            <a href="https://loja.uiclap.com/titulo/ua121453/" target="_blank" class="flex-1 border border-brand-navy/20 px-8 py-4 rounded-xl font-bold text-center hover:bg-brand-navy transition-all">Livro Físico</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="sobre" class="py-24 bg-brand-navy text-white overflow-hidden relative">
+            <div class="max-w-7xl mx-auto px-6 relative z-10">
+                <div class="grid md:grid-cols-2 gap-16 items-center">
+                    <div>
+                        <span class="text-brand-gold font-bold uppercase tracking-[0.3em] text-[10px] mb-4 block">A Voz por trás da Mensagem</span>
+                        <h2 class="text-5xl font-serif mb-8">Quem é Gabriel Marques?</h2>
+                        <p class="text-white/70 text-lg mb-8 leading-relaxed">Gabriel carrega uma mensagem que desperta e realinha. Com mais de 15 anos servindo em ministérios de louvor e MBA pela FGV, ele combina espiritualidade profunda com excelência estratégica.</p>
+                    </div>
+                    <div class="flex justify-center relative">
+                        <div class="w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-brand-gold/30 shadow-2xl relative z-10">
+                            <img src="https://picsum.photos/seed/gabriel/800/800" class="w-full h-full object-cover">
+                        </div>
+                        <div class="absolute -bottom-6 -right-6 glass-card p-6 rounded-2xl max-w-xs text-brand-navy z-20">
+                            <p class="italic font-serif text-lg leading-snug">"Minha missão é servir a igreja local com intensidade, verdade e excelência."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Podcast Section -->
+        <section id="podcast" class="py-24 bg-brand-warm">
+            <div class="max-w-7xl mx-auto px-6 text-center mb-16">
+                <h2 class="text-5xl font-serif mb-6">ARCO Podcast</h2>
+                <p class="text-brand-navy/70 text-lg">O instrumento para alinhar e lançar pessoas na direção do seu propósito.</p>
+            </div>
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="navy-gradient rounded-[2.5rem] p-8 md:p-12 text-white shadow-2xl flex flex-col md:flex-row gap-12 items-center">
+                    <div class="w-48 h-48 bg-white/10 rounded-3xl overflow-hidden shrink-0 shadow-xl">
+                        <img src="https://picsum.photos/seed/podcast/400/400" class="w-full h-full object-cover">
+                    </div>
+                    <div class="flex-1 text-center md:text-left">
+                        <span class="px-3 py-1 bg-brand-gold text-brand-navy text-[10px] font-bold uppercase rounded-full mb-4 inline-block">Último Episódio</span>
+                        <h3 class="text-3xl md:text-4xl font-serif mb-6">Lançando vidas para o alvo certo</h3>
+                        <audio controls class="w-full h-12 rounded-full mb-6">
+                            <source src="#" type="audio/mpeg">
+                        </audio>
+                        <a href="#" class="bg-white/10 hover:bg-white/20 px-6 py-3 rounded-full text-xs font-bold transition-all inline-block">Ouvir no Spotify</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Course Section (Summary) -->
+        <section id="curso" class="py-24 bg-brand-navy text-white relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-full opacity-5 pointer-events-none">
+                <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,_#D4AF37_0%,_transparent_70%)] opacity-20"></div>
+            </div>
+            <div class="max-w-7xl mx-auto px-6 relative z-10">
+                <div class="grid lg:grid-cols-2 gap-16 items-center">
+                    <div>
+                        <span class="text-brand-gold font-bold uppercase tracking-[0.3em] text-xs mb-4 block">Experiência Imersiva</span>
+                        <h2 class="text-4xl md:text-5xl font-serif mb-8">Curso Presencial <br /><span class="italic text-brand-gold font-hand lowercase text-6xl md:text-7xl">Princípios da Adoração</span></h2>
+                        <p class="text-white/70 text-lg mb-10 leading-relaxed">Uma jornada intensiva de 2 dias para mergulhar nos fundamentos bíblicos e práticos da adoração. Ideal para equipes de louvor e líderes.</p>
+                        <div class="flex flex-wrap gap-4">
+                            <a href="https://api.whatsapp.com/send/?phone=5521972585652" target="_blank" class="gold-gradient text-brand-navy px-8 py-4 rounded-full font-bold text-base hover:opacity-90 transition-all shadow-xl shadow-brand-gold/10">Quero ser avisado</a>
+                            <a href="#" onclick="showView('course')" class="border border-white/20 text-white px-8 py-4 rounded-full font-bold text-base hover:bg-white/10 transition-all flex items-center gap-2 group">
+                                Saiba mais
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-1 transition-transform"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="relative">
+                        <div class="aspect-video rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
+                            <img src="https://picsum.photos/seed/workshop/1200/800" class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contato" class="py-24 bg-white">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="bg-brand-navy rounded-[3rem] p-10 md:p-20 text-white grid lg:grid-cols-2 gap-16 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-64 h-64 bg-brand-gold/10 rounded-full blur-3xl -mr-32 -mt-32"></div>
+                    <div>
+                        <h2 class="text-4xl md:text-5xl font-serif mb-8 leading-tight">Leve esta mensagem para sua <span class="italic text-brand-gold">igreja ou evento</span>.</h2>
+                        <p class="text-white/60 text-lg mb-10">Será uma alegria caminhar com vocês em um tempo de despertamento, cura e ativação profética.</p>
+                        <div class="space-y-6">
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-brand-gold shrink-0">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                                </div>
+                                <p class="font-medium">contato@gabrielmarques.com.br</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white/5 backdrop-blur-sm rounded-3xl p-8 border border-white/10 relative z-10">
+                        <form class="space-y-4">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <input type="text" placeholder="Nome" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:border-brand-gold outline-none text-sm">
+                                <input type="email" placeholder="E-mail" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:border-brand-gold outline-none text-sm">
+                            </div>
+                            <textarea placeholder="Sua mensagem" rows="4" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:border-brand-gold outline-none resize-none text-sm"></textarea>
+                            <button type="button" class="w-full gold-gradient text-brand-navy font-bold py-4 rounded-xl hover:opacity-90 transition-all">Enviar Mensagem</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- VIEW: COURSE DETAILS -->
+    <div id="view-course" class="view">
+        <!-- Hero Course -->
+        <section class="relative pt-32 pb-20 overflow-hidden min-h-[70vh] flex items-center">
+            <div class="absolute inset-0 z-0">
+                <div class="absolute top-0 left-0 w-full h-full bg-brand-warm opacity-90"></div>
+                <div class="absolute -top-24 -right-24 w-96 h-96 bg-brand-gold/10 rounded-full blur-3xl"></div>
+            </div>
+
+            <div class="max-w-7xl mx-auto px-6 relative z-10 text-center">
+                <span class="inline-block px-4 py-1 bg-brand-gold/10 text-brand-gold rounded-full text-[10px] font-bold uppercase tracking-widest mb-6">Imersão Profética & Técnica</span>
+                <h1 class="text-5xl md:text-7xl font-serif leading-tight mb-8">Curso Presencial <br><span class="italic text-brand-gold font-hand lowercase text-7xl md:text-9xl">Princípios da Adoração</span></h1>
+                <p class="text-xl text-brand-navy/70 leading-relaxed mb-8 max-w-3xl mx-auto">Uma experiência exclusiva para ministros que desejam alinhar seu som ao coração de Deus e elevar o nível da sua entrega no altar.</p>
+                
+                <!-- BOTÃO VOLTAR (Solicitado) -->
+                <div class="mb-12">
+                    <a href="#" onclick="showView('home')" class="inline-flex items-center gap-2 text-brand-navy/40 hover:text-brand-gold transition-colors font-bold uppercase tracking-widest text-[10px]">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="rotate-180"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                        Voltar para a página inicial
+                    </a>
+                </div>
+
+                <div class="flex flex-wrap justify-center gap-6 mb-16">
+                    <div class="flex items-center gap-3 bg-white/50 backdrop-blur px-6 py-3 rounded-2xl border border-white/20 font-bold">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2"><rect width="18" height="18" x="3" y="4" rx="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/></svg>
+                        2 Dias Intensivos
+                    </div>
+                    <div class="flex items-center gap-3 bg-white/50 backdrop-blur px-6 py-3 rounded-2xl border border-white/20 font-bold">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+                        Vagas Limitadas
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Modules -->
+        <section class="py-24 bg-white">
+            <div class="max-w-7xl mx-auto px-6">
+                <h2 class="text-4xl md:text-5xl font-serif mb-16 text-center">O que você vai <span class="italic text-brand-gold">aprender</span></h2>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="p-10 rounded-3xl bg-brand-warm/50 border border-brand-navy/5 hover:border-brand-gold/30 transition-all group">
+                        <div class="w-12 h-12 bg-brand-navy text-brand-gold rounded-2xl flex items-center justify-center mb-6"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
+                        <h4 class="text-xl font-bold mb-4">Teologia do Som</h4>
+                        <p class="text-brand-navy/60">A base bíblica para a música no Reino e o papel espiritual do levita no Tabernáculo.</p>
+                    </div>
+                    <div class="p-10 rounded-3xl bg-brand-warm/50 border border-brand-navy/5 hover:border-brand-gold/30 transition-all group">
+                        <div class="w-12 h-12 bg-brand-navy text-brand-gold rounded-2xl flex items-center justify-center mb-6"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
+                        <h4 class="text-xl font-bold mb-4">Dinâmica de Banda</h4>
+                        <p class="text-brand-navy/60">Arranjos congregacionais, timbragem e como criar uma unidade sonora poderosa.</p>
+                    </div>
+                    <div class="p-10 rounded-3xl bg-brand-warm/50 border border-brand-navy/5 hover:border-brand-gold/30 transition-all group">
+                        <div class="w-12 h-12 bg-brand-navy text-brand-gold rounded-2xl flex items-center justify-center mb-6"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg></div>
+                        <h4 class="text-xl font-bold mb-4">Fluidez Profética</h4>
+                        <p class="text-brand-navy/60">Como conduzir momentos espontâneos e ler o ambiente espiritual durante o louvor.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Course -->
+        <section class="py-24 bg-brand-warm">
+            <div class="max-w-4xl mx-auto px-6 text-center">
+                <h2 class="text-4xl md:text-5xl font-serif mb-12">Pronto para o <span class="italic text-brand-gold font-hand lowercase text-6xl">próximo nível</span>?</h2>
+                <div class="bg-white p-12 rounded-[3rem] shadow-2xl border border-brand-navy/5">
+                    <span class="text-brand-navy/40 uppercase tracking-widest text-xs font-bold">Investimento</span>
+                    <div class="flex items-center justify-center gap-2 mt-2 mb-8">
+                        <span class="text-2xl font-bold opacity-50">R$</span>
+                        <span class="text-6xl font-serif font-bold text-brand-navy">497</span>
+                        <span class="text-lg opacity-50">,00</span>
+                    </div>
+                    <a href="https://api.whatsapp.com/send/?phone=5521972585652&text=Olá! Quero garantir minha vaga no curso presencial." target="_blank" class="w-full block bg-brand-navy text-white px-10 py-5 rounded-2xl font-bold text-xl hover:bg-brand-gold transition-all flex items-center justify-center gap-3 group">
+                        Garantir minha Vaga
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-2 transition-transform"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="py-12 bg-brand-warm border-t border-brand-navy/5">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8 text-center md:text-left">
+            <div>
+                <p class="font-serif text-xl font-bold mb-2">GABRIEL MARQUES</p>
+                <p class="text-[10px] text-brand-navy/40 uppercase tracking-widest">© 2024 Todos os direitos reservados.</p>
+            </div>
+            <div class="flex gap-6">
+                <a href="https://api.whatsapp.com/send/?phone=5521972585652" target="_blank" class="w-10 h-10 rounded-full border border-brand-navy/10 flex items-center justify-center hover:bg-brand-navy hover:text-white transition-all">
+                    <svg viewBox="0 0 24 24" class="w-5 h-5 fill-current" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                </a>
+                <a href="https://instagram.com/glnmarques" target="_blank" class="w-10 h-10 rounded-full border border-brand-navy/10 flex items-center justify-center hover:bg-brand-navy hover:text-white transition-all">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://api.whatsapp.com/send/?phone=5521972585652" target="_blank" class="fixed bottom-6 right-6 z-[100] w-14 h-14 bg-[#25D366] text-white rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-transform">
+        <svg viewBox="0 0 24 24" class="w-8 h-8 fill-current" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    </a>
+
+    <script>
+        function showView(viewId) {
+            // Esconder todas as views
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            
+            // Mostrar a view selecionada
+            document.getElementById('view-' + viewId).classList.add('active');
+
+            // Atualizar estado do body para navegação dinâmica
+            if (viewId === 'course') {
+                document.body.classList.add('is-course');
+                document.getElementById('nav-title').innerText = 'Curso Presencial';
+            } else {
+                document.body.classList.remove('is-course');
+                document.getElementById('nav-title').innerText = 'Gabriel Marques';
+            }
+
+            // Scroll para o topo (Garante que a nova página comece de cima)
+            window.scrollTo(0, 0);
+            
+            // Prevenir comportamento padrão se for disparado por link
+            if (event) event.preventDefault();
+        }
+
+        // Suporte para âncoras internas suaves na Home
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href !== '#' && !document.body.classList.contains('is-course')) {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth' });
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
